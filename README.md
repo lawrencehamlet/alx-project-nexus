@@ -78,7 +78,7 @@ NEXT_PUBLIC_FIREBASE_APP_ID=...
 
 ### Install & Run
 ```powershell
-cd "C:\Users\Lawrence Bayode\Desktop\alx-project-nexus\webapp"
+cd "C:\Users\Lawrence Bayode\Desktop\alx-project-nexus\onlinePollSystem"
 npm install
 npm run dev
 ```
