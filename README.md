@@ -1,6 +1,8 @@
 # 🗳️ PollPulse — Online Polling Web App
 
 ## What I'm Building
+\n+### Live App
+- https://alx-project-nexus-beige-theta.vercel.app
 PollPulse is a modern, accessible web application for creating polls, collecting votes, and viewing live analytics. It focuses on a clean UX, clear validation, and reliable persistence via Firebase Firestore. Users can:
 - Create a poll with 2–3 options and a defined schedule.
 - Vote once and see immediate visual feedback.
@@ -35,7 +37,7 @@ Key screens implemented:
 - Accessibility: ARIA attributes across critical components
 
 ### Project Structure (key paths)
-- App pages: `onlinePollSytem/src/app/**`
+- App pages: `onlinePollSystem/src/app/**`
 - Components: `onlinePollSystem/src/components/**`
 - Firebase/Firestore helpers: `onlinePollSystem/src/lib/**`
 - API routes: `onlinePollSystem/src/app/api/**`
