@@ -1,0 +1,263 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* PollPulse Global Styles (globals.css)
+   Responsive, scalable, and fully aligned with the official design system
+*/
+
+/* ------------------------------------- */
+/* 1. CSS RESET                          */
+/* ------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: "Inter", sans-serif;
+  background: #F7F7FB; /* Ultra Light */
+  color: #1E1E1E; /* Deep Graphite */
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+/* ------------------------------------- */
+/* 2. ROOT VARIABLES (DESIGN TOKENS)     */
+/* ------------------------------------- */
+:root {
+  /* Brand Colors */
+  --color-primary: #6C63FF;
+  --color-primary-dark: #4A3FFF;
+  --color-lilac-soft: #DAD7FF;
+  --color-aqua: #34D1BF;
+  --color-yellow: #FFCA2C;
+  --color-peach: #FF6F61;
+
+  /* Neutrals */
+  --color-deep: #1E1E1E;
+  --color-slate: #4B5563;
+  --color-gray: #9CA3AF;
+  --color-soft-gray: #E5E7EB;
+  --color-bg-main: #F7F7FB;
+
+  /* Typography */
+  --font-display: "Poppins", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 24px;
+  --spacing-2xl: 32px;
+  --spacing-3xl: 48px;
+  --spacing-4xl: 64px;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-full: 50%;
+
+  /* Shadows */
+  --shadow-card: 0px 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-modal: 0px 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* Transitions */
+  --transition-default: all 0.2s ease;
+
+  /* Legacy variables */
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* ------------------------------------- */
+/* 3. TYPOGRAPHY                         */
+/* ------------------------------------- */
+h1 {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 600;
+}
+h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+}
+h3 {
+  font-family: var(--font-body);
+  font-size: 22px;
+  font-weight: 600;
+}
+body {
+  font-size: 16px;
+  font-weight: 400;
+}
+small {
+  font-size: 14px;
+}
+
+/* ------------------------------------- */
+/* 4. BUTTONS                            */
+/* ------------------------------------- */
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-default);
+}
+.btn-primary:hover {
+  background: var(--color-primary-dark);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1.5px solid var(--color-primary);
+  color: var(--color-primary);
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  transition: var(--transition-default);
+}
+.btn-secondary:hover {
+  background: var(--color-lilac-soft);
+}
+
+.btn-danger {
+  background: var(--color-peach);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+}
+
+/* ------------------------------------- */
+/* 5. INPUT FIELDS                       */
+/* ------------------------------------- */
+.input {
+  width: 100%;
+  height: 48px;
+  padding: 0 12px;
+  border: 1.5px solid var(--color-soft-gray);
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  transition: var(--transition-default);
+}
+.input::placeholder {
+  color: var(--color-gray);
+}
+.input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
+  outline: none;
+}
+
+/* ------------------------------------- */
+/* 6. CARDS                              */
+/* ------------------------------------- */
+.card {
+  background: #fff;
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+/* ------------------------------------- */
+/* 7. NAVIGATION                         */
+/* ------------------------------------- */
+.navbar {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  padding: 0 var(--spacing-xl);
+  box-shadow: var(--shadow-card);
+}
+
+.nav-link {
+  font-size: 16px;
+  color: var(--color-slate);
+  padding: 8px 12px;
+  transition: var(--transition-default);
+  cursor: pointer;
+}
+.nav-link.active {
+  color: var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
+}
+.nav-link:hover {
+  color: var(--color-primary);
+}
+
+/* ------------------------------------- */
+/* 8. INTERACTION STATES                 */
+/* ------------------------------------- */
+.interactive:hover {
+  transform: scale(1.01);
+}
+.interactive:active {
+  transform: scale(0.98);
+}
+
+/* ------------------------------------- */
+/* 9. RESPONSIVE MEDIA QUERIES          */
+/* ------------------------------------- */
+
+/* DESKTOP (≥ 1280px) */
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+    margin: auto;
+  }
+}
+
+/* LAPTOPS (1024px – 1279px) */
+@media (max-width: 1279px) and (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+    margin: auto;
+  }
+}
+
+/* TABLETS (768px – 1023px) */
+@media (max-width: 1023px) and (min-width: 768px) {
+  h1 { font-size: 30px; }
+  h2 { font-size: 24px; }
+  .navbar {
+    padding: 0 var(--spacing-lg);
+  }
+}
+
+/* MOBILE (≤ 767px) */
+@media (max-width: 767px) {
+  h1 { font-size: 26px; }
+  h2 { font-size: 20px; }
+
+  .navbar {
+    height: 56px;
+    padding: 0 var(--spacing-lg);
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-danger {
+    width: 100%;
+    text-align: center;
+  }
+
+  .card {
+    padding: var(--spacing-lg);
+  }
+}

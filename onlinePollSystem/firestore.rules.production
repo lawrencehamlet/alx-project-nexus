@@ -1,0 +1,75 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Production-ready rules with authentication
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    function isValidPoll() {
+      let incoming = request.resource.data;
+      return incoming.keys().hasAll(['title', 'description', 'options', 'createdBy']) &&
+             incoming.title is string && incoming.title.size() > 0 && incoming.title.size() <= 500 &&
+             incoming.description is string && incoming.description.size() <= 2000 &&
+             incoming.options is list && incoming.options.size() >= 2 && incoming.options.size() <= 10 &&
+             incoming.createdBy is string;
+    }
+    
+    function isValidOption(option) {
+      return option.keys().hasAll(['id', 'label', 'votes']) &&
+             option.id is string &&
+             option.label is string && option.label.size() > 0 && option.label.size() <= 200 &&
+             option.votes is number && option.votes >= 0;
+    }
+    
+    function allOptionsValid() {
+      let incoming = request.resource.data;
+      return incoming.options.size() > 0 &&
+             incoming.options.hasAll(incoming.options.map(opt => isValidOption(opt)));
+    }
+    
+    function onlyVotesChanged() {
+      let oldData = resource.data;
+      let newData = request.resource.data;
+      return newData.title == oldData.title &&
+             newData.description == oldData.description &&
+             newData.createdBy == oldData.createdBy &&
+             newData.options.size() == oldData.options.size();
+    }
+    
+    // Polls collection
+    match /polls/{pollId} {
+      // Anyone can read polls
+      allow read: if true;
+      
+      // Only authenticated users can create polls
+      allow create: if isAuthenticated() &&
+                       isValidPoll() && 
+                       allOptionsValid() &&
+                       request.resource.data.createdBy == request.auth.uid;
+      
+      // Only owner can update poll metadata, anyone can vote (increment votes)
+      allow update: if (isOwner(resource.data.createdBy) && isValidPoll()) ||
+                       (onlyVotesChanged() && allOptionsValid());
+      
+      // Only owner can delete
+      allow delete: if isOwner(resource.data.createdBy);
+    }
+    
+    // Vote tracking to prevent duplicate votes (optional)
+    match /votes/{voteId} {
+      // voteId format: {pollId}_{userId} or {pollId}_{sessionId}
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasAll(['pollId', 'optionId', 'votedAt']) &&
+                       request.resource.data.pollId is string &&
+                       request.resource.data.optionId is string;
+      allow update, delete: if false; // Votes are immutable
+    }
+  }
+}

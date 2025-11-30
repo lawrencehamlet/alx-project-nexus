@@ -1,146 +1,150 @@
- # 🗳️ PollPulse — Online Poll System  
+# 🗳️ PollPulse — Online Polling Web App
 
-## 📘 Overview of the ProDev Front-End Engineering Program  
+## What We’re Building
+PollPulse is a modern, accessible web application for creating polls, collecting votes, and viewing live analytics. It focuses on a clean UX, clear validation, and reliable persistence via Firebase Firestore. Users can:
+- Create a poll with 2–3 options and a defined schedule.
+- Vote once and see immediate visual feedback.
+- View live results with charts and management actions (update/delete).
 
-The **ProDev Front-End Engineering Program** is an immersive journey into the world of software development. It focuses on equipping learners with the technical and professional skills required to build scalable, modern, and user-focused digital products.  
+ 
+---
 
-Throughout the program, learners explore both the **technical** and **non-technical** aspects of software engineering — from system design and implementation to collaboration, communication, and leadership.  
+## Concept Alignment
+The implementation follows the project concept by emphasizing:
+- Clear poll lifecycle: create → share → vote → analyze → manage.
+- Strong validation: enforce 2–3 options, time windows, and clear inline errors.
+- Feedback loops: buttons transition states (Create→Created, Vote→Voted) to confirm actions.
+- Accessible design: ARIA roles/labels for navigation, forms, dialogs, charts, and dynamic content.
+- Scalable data: Firebase Firestore for persistent polls and votes; rules and indexes configured.
 
-### 🚀 Major Learnings  
-
-#### 🧠 Key Technologies Covered
-- **Web Development:** HTML, CSS, JavaScript, React, TypeScript, Next.js  
-- **Mobile & PWA Development:** Responsive UI design, Progressive Web Apps (PWA)  
-- **API Integration:** RESTful APIs, GraphQL  
-- **UI Frameworks:** Tailwind CSS, DaisyUI  
-- **Version Control:** Git & GitHub  
-
-#### 💡 Important Frontend Development Concepts
-- **Next.js Architecture & Routing**
-- **React State Management (Context API, Redux)**
-- **System Design & Requirement Analysis**
-- **TypeScript for Scalable Code**
-- **API Integration and Custom Hooks**
-- **Performance Optimization & Accessibility**
-
-#### ⚔️ Challenges and Solutions
-| Challenge | Solution |
-|------------|-----------|
-| Managing complex application state | Implemented **Context API** for predictable global state management |
-| Real-time updates simulation | Used React hooks and local mock APIs to simulate dynamic polling |
-| UI responsiveness | Leveraged **Tailwind CSS** and media queries for seamless device adaptation |
-| Project organization and modularity | Adopted folder-based architecture and reusable components |
-
-#### 🧭 Best Practices & Personal Takeaways
-- **Plan before you code:** Clear requirements and architecture improve efficiency.  
-- **Keep it modular:** Reusable, self-contained components save time.  
-- **Type safety matters:** TypeScript reduces runtime errors and improves maintainability.  
-- **Collaboration counts:** Peer feedback enhances design and logic quality.  
-- **Document everything:** Good documentation clarifies your thinking and helps others.  
+Key screens implemented:
+- Dashboard (discover, quick actions, active poll card)
+- Create Poll (validated form with auto end-time)
+- Vote (per-poll vote page)
+- Live Results (chart + management actions)
 
 ---
 
-## 🧩 Product Requirements Document (PRD)
+## Build & Architecture
 
-### 📘 Product Overview
-**Product Name:** PollPulse  
-**Purpose:** PollPulse is a lightweight web app that enables users to participate in online polls, vote on questions, and view live results through interactive charts.  
-**Goal:** Deliver an intuitive and engaging platform that demonstrates real-time interactivity and modern front-end development practices.
+### Tech Stack
+- Framework: Next.js (App Router) + React + TypeScript
+- Styling: Tailwind CSS + DaisyUI
+- Data: Firebase SDK + Firestore
+- Charts: Chart.js via `react-chartjs-2`
+- Accessibility: ARIA attributes across critical components
 
-### 👥 Target Users
-- General users who wish to vote on polls.  
-- Content creators who want to collect audience insights.  
-- Developers and students learning front-end design and state management.
+### Project Structure (key paths)
+- App pages: `onlinePollSytem/src/app/**`
+- Components: `onlinePollSystem/src/components/**`
+- Firebase/Firestore helpers: `onlinePollSystem/src/lib/**`
+- API routes: `onlinePollSystem/src/app/api/**`
 
-### 🎯 Objectives
-- Enable users to vote on polls dynamically.  
-- Display live poll results visually without reloading.  
-- Ensure a clean, responsive, and accessible user experience.
-
-### ⚙️ Key Features
-| Feature | Description | Priority |
-|----------|--------------|----------|
-| Poll List Page | Display all polls fetched from an API | High |
-| Voting System | Users can vote on a poll once | High |
-| Live Results Chart | Visualize results dynamically | High |
-| Poll Creation (Optional) | Admin or user can create a poll | Medium |
-| Responsive Design | Seamless use across devices | High |
-
-### 🧭 User Flow
-1. User lands on the Home page (Poll List).  
-2. User selects a poll and views its details.  
-3. User casts a vote.  
-4. Live chart updates instantly with results.  
-
-### 🧮 Success Metrics
-- < 1 second page load time.  
-- Instant vote updates reflected in chart.  
-- >90% performance score on Lighthouse.  
-
-### 💻 Technical Constraints
-- Built with **React + TypeScript**  
-- Uses **Context API** for state management  
-- Charting via **Recharts**  
-- Mock API used for data simulation  
-- Deployed with **Vercel**
-
----
-
-## 🧠 Software Requirements Document (SRD)
-
-### 🧩 System Overview
-PollPulse is a single-page application built with React and TypeScript. It simulates a real-time voting experience using local state and mock APIs.
-
-### ⚙️ Functional Requirements
-| ID | Requirement | Description |
-|----|--------------|-------------|
-| FR-1 | Display Poll List | Fetch and render available polls |
-| FR-2 | Vote on Poll | Allow one vote per user per poll |
-| FR-3 | Live Results | Display poll results dynamically |
-| FR-4 | Data Management | Manage votes and polls with Context API |
-| FR-5 | Responsive UI | Adapt layout for all screen sizes |
-
-### 🧱 Non-Functional Requirements
-| ID | Requirement | Description |
-|----|--------------|-------------|
-| NFR-1 | Performance | Page load < 1s, update < 200ms |
-| NFR-2 | Usability | Simple, intuitive interface |
-| NFR-3 | Scalability | Easily connectable to real backend |
-| NFR-4 | Maintainability | Clean, modular code structure |
-| NFR-5 | Accessibility | WCAG-compliant and keyboard-friendly |
-
-### 🧰 System Architecture
-**Architecture Type:** Component-based SPA  
-
-**Layers:**
-- **Presentation Layer:** UI Components  
-- **Logic Layer:** Context API + Hooks  
-- **Data Layer:** Mock data simulating API calls  
-
-### 🧩 Component Breakdown
-| Component | Purpose |
-|------------|----------|
-| App.tsx | Root component and context provider |
-| PollList.tsx | Displays all polls |
-| PollCard.tsx | Shows question and options |
-| PollResult.tsx | Renders live results chart |
-| PollContext.tsx | Manages global state and voting logic |
-
-### 🔁 Data Flow
-1. Poll data fetched (mocked) → displayed in list  
-2. User votes → vote updates in context  
-3. Context triggers re-render → chart updates live  
-
-### 🧮 Data Model
+### Data Model (Firestore)
+Poll document (simplified):
 ```ts
-interface PollOption {
-  id: string;
-  text: string;
-  votes: number;
-}
+type PollOption = { id: string; label: string; votes?: number };
+type Poll = {
+  id: string;            // auto-generated by Firestore
+  title: string;         // question
+  description?: string;
+  options: PollOption[]; // 2–3 options
+  startDate: string;     // ISO date
+  endDate: string;       // ISO date
+  startTime: string;     // HH:mm
+  endTime: string;       // HH:mm
+  isActive?: boolean;
+};
+```
 
-interface Poll {
-  id: string;
-  question: string;
-  options: PollOption[];
-}
+---
+
+## Development Workflow
+
+### Prerequisites
+- Node.js 18+
+- Firebase CLI (optional for deploying rules/indexes)
+- Environment variables in `onlinePollSystem/.env.local`:
+```
+NEXT_PUBLIC_FIREBASE_API_KEY=...
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=...
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=...
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=...
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=...
+NEXT_PUBLIC_FIREBASE_APP_ID=...
+```
+
+### Install & Run
+```powershell
+cd "C:\Users\Lawrence Bayode\Desktop\alx-project-nexus\webapp"
+npm install
+npm run dev
+```
+App runs at `http://localhost:3000`.
+
+### Key API Routes
+- `GET /api/polls` – list polls
+- `POST /api/polls/new` – create poll
+- `GET /api/polls/:id` – poll by id (with guard against empty id)
+- `PUT /api/polls/:id` – update poll
+- `DELETE /api/polls/:id` – delete poll (validated, existence-checked)
+- `POST /api/vote` – submit a vote (transactional increment)
+- `GET /api/active-polls` – first active poll for dashboard/live-results
+
+---
+
+## Tools Used
+- Next.js App Router (routing, server functions)
+- React 19 (components, hooks)
+- TypeScript (type safety)
+- Tailwind CSS + DaisyUI (UI)
+- Firebase SDK v12 (client)
+- Firestore (database)
+- Chart.js + `react-chartjs-2` (visualization)
+
+---
+
+## Challenges & How They were Solved Them
+
+1) Form validation broken / unclear feedback
+- Problem: Users could submit invalid data; errors weren’t visible.
+- Solution: Added a `validate()` function enforcing required fields, 2–3 options, future start, and min 10-hour duration. Inline error messages with red borders and `role="alert"`.
+
+2) End date/time didn’t auto-compute
+- Problem: End fields only updated sometimes.
+- Solution: `useEffect` re-computes end = start + 10h whenever start date/time change and clears related errors.
+
+3) Premature success states (Create→Created, Vote→Voted)
+- Problem: Buttons flipped states before the action completed.
+- Solution: Introduced explicit booleans (`created`, `hasVoted`) set only after successful operations.
+
+4) Vote page 500 errors and schema mismatches
+- Problem: Response fields (`title` vs `question`) caused breakage.
+- Solution: Normalized API responses and callback signatures; added defensive refetch.
+
+5) Firestore `PERMISSION_DENIED` on create
+- Problem: Rules blocked write operations during dev.
+- Solution: Deployed permissive dev rules; kept production rules separate for later auth.
+
+6) GET `/api/polls/:id` empty path error
+- Problem: Empty/whitespace id caused Firestore `doc()` errors.
+- Solution: Trim + guard id; return `400` for missing id; try/catch with logging.
+
+7) Delete "poll not found" despite valid id
+- Problem: Route treated `params` incorrectly; id became "missing".
+- Solution: In App Router, `params` is a Promise in newer Next.js – updated GET/PUT/DELETE to `await params` and added existence checks in `removePoll()`.
+
+---
+
+## Accessibility (A11y)
+- Added ARIA roles/labels across navigation, forms, dialogs, charts, and dynamic states.
+- Radio inputs are now real form controls (`aria-checked`, `radiogroup`).
+- Error and loading states use live regions (`role=status`, `aria-live`).
+
+---
+
+## Next Steps
+- Real-time updates (web sockets or Firestore listeners)
+- Firebase Authentication + production rules
+- Duplicate vote prevention and ownership fields
+- Share links and deep-linking enhancements
