@@ -1,6 +1,6 @@
 # 🗳️ PollPulse — Online Polling Web App
 
-## What We’re Building
+## What I'm Building
 PollPulse is a modern, accessible web application for creating polls, collecting votes, and viewing live analytics. It focuses on a clean UX, clear validation, and reliable persistence via Firebase Firestore. Users can:
 - Create a poll with 2–3 options and a defined schedule.
 - Vote once and see immediate visual feedback.
